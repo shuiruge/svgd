@@ -32,7 +32,10 @@ class SVGD:
         pdist = euc_dist(X,X)
 
         if self.h is None:
-            h = get_median(pdist)  
+            if X.shape[0].value == 1:
+                h = 1.
+            else:
+                h = get_median(pdist)  
             self.h = tf.sqrt(0.5 * h / tf.log(X.shape[0].value+1.))
 
         kxy = rbf_kernel(pdist,self.h)
